@@ -11,10 +11,11 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 9.8.2
       - name: Build True Opsec
-        run: |
-          chmod +x gradlew
-          ./gradlew build
+        run: gradle build
       - name: Merge into Bloom
         run: python3 merge_into_bloom.py bloom-client.jar build/libs/trueopsec-1.0.0.jar bloom-client-true-opsec.jar
       - uses: actions/upload-artifact@v4
