@@ -19,12 +19,20 @@ loom {
 
 sourceSets {
 	main {
-		java.srcDirs = ['main/java']
-		resources.srcDirs = ['main/resources']
+		resources {
+			srcDirs = ['.']
+			include 'fabric.mod.json'
+		}
 	}
 	client {
-		java.srcDirs = ['client/java']
-		resources.srcDirs = ['client/resources']
+		java {
+			srcDirs = ['.']
+			include '*.java'
+		}
+		resources {
+			srcDirs = ['.']
+			include 'trueopsec.client.mixins.json'
+		}
 	}
 }
 
@@ -62,16 +70,5 @@ jar {
 
 	from("LICENSE") {
 		rename { "${it}_$projectName" }
-	}
-}
-
-publishing {
-	publications {
-		create("mavenJava", MavenPublication) {
-			from components.java
-		}
-	}
-
-	repositories {
 	}
 }
